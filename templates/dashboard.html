@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Detection workspace — RoadVision AI{% endblock %}
+{% block page %}dashboard{% endblock %}
+{% block content %}
+<div class="app-shell">
+  <aside class="sidebar">
+    <a class="brand sidebar-brand" href="/"><span class="brand-mark"><i data-lucide="route"></i></span><span class="brand-name">roadvision<span>ai</span></span></a>
+    <div class="sidebar-label">WORKSPACE</div>
+    <nav class="side-nav" aria-label="Workspace navigation">
+      <a class="side-link active" href="/dashboard"><i data-lucide="scan-search"></i><span>Detection</span></a>
+      <a class="side-link" href="/analytics"><i data-lucide="chart-no-axes-combined"></i><span>Analytics</span></a>
+      <a class="side-link" href="/results"><i data-lucide="images"></i><span>Results</span></a>
+      <a class="side-link mobile-only-link" href="/about" aria-label="Technology" title="Technology"><i data-lucide="cpu"></i><span>Technology</span></a>
+    </nav>
+    <div class="sidebar-label sidebar-label-lower">RESOURCES</div>
+    <nav class="side-nav"><a class="side-link" href="/about"><i data-lucide="cpu"></i><span>Technology</span></a></nav>
+    <div class="sidebar-spacer"></div>
+    <div class="sidebar-model-card">
+      <span class="model-card-icon"><i data-lucide="scan-line"></i></span>
+      <div><strong>Detection model</strong><span id="model-status-text">Checking model…</span></div>
+      <span class="model-status-dot" id="model-status-dot"></span>
+    </div>
+    <a class="sidebar-home" href="/"><i data-lucide="arrow-left"></i> Back to home</a>
+    <div class="sidebar-user"><span class="avatar">RV</span><span><strong>RoadVision AI</strong><small>Inspection workspace</small></span><i data-lucide="chevrons-up-down"></i></div>
+  </aside>
+
+  <main class="workspace-main">
+    <header class="workspace-topbar"><div class="breadcrumb">Workspace <i data-lucide="chevron-right"></i> <strong>Detection</strong></div><div class="topbar-actions"><span class="topbar-date"><i data-lucide="lock-keyhole"></i> Images stay in your session</span><a class="icon-button mobile-home" href="/" aria-label="Home"><i data-lucide="house"></i></a></div></header>
+    <div class="workspace-content">
+      <div class="page-title-row"><div><div class="eyebrow">ROAD INSPECTION / DETECTION</div><h1>Detection workspace</h1><p>Upload a road image to inspect damage with your configured vision model.</p></div><a class="button button-outline button-small title-action" href="/about"><i data-lucide="circle-help"></i> How it works</a></div>
+      <section class="model-notice notice-warning" id="model-notice" role="status" hidden><i data-lucide="triangle-alert"></i><div><strong>Model not configured</strong><span id="model-notice-message">Add a trained model path to enable analysis.</span></div><a href="/about">Setup guide <i data-lucide="arrow-up-right"></i></a></section>
+
+      <section class="upload-panel panel">
+        <div class="panel-heading"><div><span class="step-label">STEP 01</span><h2>Choose road imagery</h2><p>Upload a clear road-surface photo to begin.</p></div><span class="format-tag"><i data-lucide="file-image"></i> JPG · JPEG · PNG</span></div>
+        <div class="dropzone" id="dropzone" tabindex="0" role="group" aria-label="Choose a road image or drag and drop it here">
+          <input id="image-input" type="file" accept=".jpg,.jpeg,.png,image/jpeg,image/png" hidden>
+          <div class="upload-symbol"><i data-lucide="upload-cloud"></i><span class="upload-orbit"></span></div>
+          <div class="dropzone-copy"><strong>Drop your road image here</strong><span>or <button class="text-button" id="browse-button" type="button">browse files</button> from your device</span></div>
+          <span class="dropzone-limit"><i data-lucide="hard-drive-download"></i> Max file size 10 MB · Images remain in this session</span>
+        </div>
+        <div class="selected-file" id="selected-file" hidden><span class="selected-file-icon"><i data-lucide="image"></i></span><span class="selected-file-copy"><strong id="selected-filename"></strong><small id="selected-filesize"></small></span><button type="button" class="icon-button remove-file" id="remove-file" aria-label="Remove selected image"><i data-lucide="x"></i></button></div>
+        <div class="upload-footer"><span class="privacy-note"><i data-lucide="shield-check"></i> The original upload is processed in memory and not written to the server.</span><button class="button button-primary analyze-button" id="analyze-button" type="button" disabled><i data-lucide="scan-line"></i> <span>Analyze road</span></button></div>
+        <p class="form-error" id="upload-error" role="alert" hidden></p>
+      </section>
+
+      <div class="results-heading"><div><span class="step-label">STEP 02</span><h2>Analysis results</h2></div><span class="result-context" id="result-context">Results appear after an analysis</span></div>
+      <section class="comparison-grid" id="comparison-grid">
+        <article class="image-panel panel"><div class="image-panel-heading"><span><i data-lucide="image"></i> Original image</span><span class="image-label" id="original-label">WAITING</span></div><div class="image-stage empty-stage" id="original-stage"><div class="empty-visual"><i data-lucide="image-plus"></i></div><strong>Your image will appear here</strong><span>Choose an image above to preview</span><img id="original-preview" alt="Uploaded original road image" hidden></div></article>
+        <article class="image-panel panel"><div class="image-panel-heading"><span><i data-lucide="scan-line"></i> AI-detected image</span><span class="image-label image-label-blue" id="detected-label">AWAITING ANALYSIS</span></div><div class="image-stage empty-stage" id="detected-stage"><div class="empty-visual"><i data-lucide="scan-search"></i></div><strong>Detection overlay will appear here</strong><span>Bounding boxes come from actual model output</span><img id="detected-preview" alt="Model-annotated road image" hidden><div class="processing-overlay" id="processing-overlay" hidden><span class="processing-ring"></span><strong>Analyzing image</strong><span>Running the configured YOLO model…</span></div></div></article>
+      </section>
+      <section class="detection-details panel" id="detection-details" hidden><div class="details-heading"><div><span class="step-label">MODEL OUTPUT</span><h2>Detected damage <span id="detection-count" class="count-badge">0</span></h2></div><a class="text-link" id="open-results-link" href="/results">View full results <i data-lucide="arrow-up-right"></i></a></div><div class="detection-table-wrap"><table class="detection-table"><thead><tr><th>Class</th><th>Confidence</th><th>Bounding box <span>(x₁, y₁, x₂, y₂)</span></th></tr></thead><tbody id="detection-rows"></tbody></table></div></section>
+      <section class="session-note"><i data-lucide="info"></i><span>No predictions are shown until a trained model is configured and an image is analyzed successfully. Analytics reflect only results saved in this browser.</span></section>
+    </div>
+  </main>
+</div>
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}RoadVision AI — Making Roads Smarter with AI{% endblock %}
+{% block page %}home{% endblock %}
+{% block content %}
+<header class="site-header">
+  <a class="brand" href="/" aria-label="RoadVision AI home">
+    <span class="brand-mark"><i data-lucide="route"></i></span>
+    <span class="brand-name">roadvision<span>ai</span></span>
+  </a>
+  <nav class="top-nav" aria-label="Main navigation">
+    <a href="#technology">Technology</a>
+    <a href="#how-it-works">How it works</a>
+    <a href="/about">About</a>
+  </nav>
+  <a class="button button-outline button-small" href="/dashboard">Open workspace <i data-lucide="arrow-up-right"></i></a>
+</header>
+
+<main>
+  <section class="hero section-wrap">
+    <div class="hero-copy">
+      <div class="eyebrow"><span class="pulse-dot"></span> INTELLIGENT ROAD INSPECTION</div>
+      <h1>Making roads<br>smarter with <span class="gradient-text">AI.</span></h1>
+      <p class="hero-lede">See the road differently. Detect surface damage with a computer vision model built to turn road imagery into clearer, actionable insight.</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="/dashboard">Start detection <i data-lucide="arrow-right"></i></a>
+        <a class="button button-quiet" href="#technology">Explore technology <i data-lucide="play-circle"></i></a>
+      </div>
+      <div class="hero-footnote"><i data-lucide="shield-check"></i> Model-powered analysis. No simulated predictions.</div>
+    </div>
+
+    <div class="hero-visual" aria-label="Illustration of AI road damage detection">
+      <div class="visual-glow"></div>
+      <div class="visual-topline"><span><i data-lucide="scan-line"></i> CONCEPTUAL VISUALIZATION</span><span class="live-pill">ILLUSTRATION</span></div>
+      <div class="road-scene">
+        <div class="scene-sky"></div>
+        <div class="scene-horizon"></div>
+        <div class="scene-road"></div>
+        <div class="road-lane lane-left"></div><div class="road-lane lane-right"></div>
+        <div class="road-crack crack-one"></div><div class="road-crack crack-two"></div>
+        <div class="scan-line"></div>
+        <div class="detection-box detect-one"><span>REGION BOUNDARY</span></div>
+        <div class="detection-box detect-two"><span>REGION BOUNDARY</span></div>
+        <div class="scene-label"><i data-lucide="crosshair"></i> VISUAL PREVIEW</div>
+      </div>
+      <div class="visual-status"><span>Detection overlays appear after analysis</span><span>NOT LIVE MODEL OUTPUT</span></div>
+      <div class="float-card float-card-top"><span class="float-icon"><i data-lucide="scan"></i></span><span><strong>Surface analysis</strong><small>Precision-first detection</small></span></div>
+      <div class="float-card float-card-bottom"><span class="float-icon float-icon-purple"><i data-lucide="activity"></i></span><span><strong>4 damage classes</strong><small>D00 · D10 · D20 · D40</small></span></div>
+    </div>
+  </section>
+
+  <section class="section-wrap fact-strip" aria-label="RoadVision AI product facts">
+    <div><strong data-count="4">0</strong><span>recognized damage labels</span></div>
+    <div><strong data-count="10" data-suffix=" MB">0</strong><span>maximum image upload</span></div>
+    <div><strong data-count="0">0</strong><span>simulated predictions</span></div>
+    <div><strong data-count="1">0</strong><span>model you configure</span></div>
+  </section>
+
+  <section class="proof-strip section-wrap" aria-label="Supported damage categories">
+    <span class="proof-label">BUILT TO IDENTIFY</span>
+    <span><b>D00</b> Longitudinal</span><span><b>D10</b> Transverse</span><span><b>D20</b> Alligator</span><span><b>D40</b> Pothole</span>
+  </section>
+
+  <section class="section-wrap feature-section" id="technology">
+    <div class="section-heading">
+      <div><div class="eyebrow">INSPECTION, REIMAGINED</div><h2>From road image to <span class="gradient-text">road insight.</span></h2></div>
+      <p>Purpose-built tools bring image analysis and detection results into one focused workspace.</p>
+    </div>
+    <div class="feature-grid">
+      <article class="feature-card"><span class="feature-icon"><i data-lucide="scan-search"></i></span><span class="feature-index">01 / DETECT</span><h3>Visual damage detection</h3><p>Run a configured YOLO model against a road image and inspect its actual classifications, confidence scores, and bounding boxes.</p></article>
+      <article class="feature-card"><span class="feature-icon feature-icon-blue"><i data-lucide="layers-3"></i></span><span class="feature-index">02 / UNDERSTAND</span><h3>Every detail, in context</h3><p>Compare the original and annotated image side by side, with a precise label for every region the model detects.</p></article>
+      <article class="feature-card"><span class="feature-icon feature-icon-violet"><i data-lucide="chart-no-axes-combined"></i></span><span class="feature-index">03 / TRACK</span><h3>Evidence-led analytics</h3><p>Explore class distribution and confidence from images analyzed in this browser. Empty states stay empty until you run a real analysis.</p></article>
+    </div>
+  </section>
+
+  <section class="process-section" id="how-it-works">
+    <div class="section-wrap process-inner">
+      <div class="eyebrow">A CLEARER WAY FORWARD</div><h2>Simple to start.<br><span class="gradient-text">Built for real work.</span></h2>
+      <div class="process-steps">
+        <div class="process-step"><span>01</span><div><h3>Choose an image</h3><p>Upload a JPG or PNG from your device.</p></div></div>
+        <div class="step-connector"></div>
+        <div class="process-step"><span>02</span><div><h3>Run the model</h3><p>Your configured YOLO model analyzes the road.</p></div></div>
+        <div class="step-connector"></div>
+        <div class="process-step"><span>03</span><div><h3>Review the evidence</h3><p>Inspect, compare, and download the result.</p></div></div>
+      </div>
+      <a class="button button-primary" href="/dashboard">Explore the workspace <i data-lucide="arrow-right"></i></a>
+    </div>
+  </section>
+</main>
+<footer class="site-footer section-wrap"><a class="brand" href="/"><span class="brand-mark"><i data-lucide="route"></i></span><span class="brand-name">roadvision<span>ai</span></span></a><span>Intelligent road inspection, grounded in real model output.</span><a href="/about">About the technology <i data-lucide="arrow-up-right"></i></a></footer>
+{% endblock %}
